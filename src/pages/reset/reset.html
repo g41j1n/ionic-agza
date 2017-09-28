@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title> CAMBIO DE CONTRASEÑA</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding class="appBackground">
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label floating>Escribe tu correo electronico</ion-label>
+          <ion-input type="email"></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-grid>
+    <ion-row>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4>
+        <button ion-button color="danger" (click)="resetmail()" class="fixed-bottom" large>Cancelar</button>
+      </ion-col>
+      <ion-col col-4></ion-col>
+      <ion-col col-4>
+        <button ion-button color="success" (click)="resetmail()" class="fixed-bottom" large>Aceptar</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

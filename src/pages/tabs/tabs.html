@@ -1,5 +1,6 @@
 <ion-tabs>
-  <ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="home"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="About" tabIcon="information-circle"></ion-tab>
-  <ion-tab [root]="tab3Root" tabTitle="Contact" tabIcon="contacts"></ion-tab>
+  <ion-tab [root]="tab1Root" tabTitle="Empresas" tabIcon="home"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="Contacto" tabIcon="call" (click)="onCall"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="Web" tabIcon="cloud" (click)="openWithInAppBrowser('https://www.techiediaries.com')" ></ion-tab>
+  <ion-tab [root]="tab0Root" tabTitle="Bitacora" tabIcon="quote"></ion-tab>
 </ion-tabs>
