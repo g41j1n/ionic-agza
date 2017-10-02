@@ -1,17 +1,21 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, List } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-
+  listCompanies:any;
   constructor(public navCtrl: NavController) {
-  console.log(JSON.parse(sessionStorage.getItem('companies')));
-  console.log(sessionStorage.getItem('token'));
-  
-  
+    this.listCompanies = JSON.parse(sessionStorage.getItem('companies'));
+    // this.companies();
+    
   }
+  gotoEvent(id){
+    console.log(id);
+    
+  }
+
 
 }

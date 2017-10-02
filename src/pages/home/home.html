@@ -1,17 +1,20 @@
 <ion-header>
-  <!-- <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar> -->
+  <ion-navbar>
+    <ion-title>Empresas</ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <ion-list  no-lines>
+    <ion-item *ngFor="let item of listCompanies">
+      <ion-card (click)="gotoEvent(item.idEmpresaUsuario)">
+        <ion-card-content class="list-o-com">
+          <p>{{item.nombreEmpresa}}</p>
+          <ion-thumbnail item-end>
+            <img src={{item.urlLogo}}>
+          </ion-thumbnail>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
 </ion-content>

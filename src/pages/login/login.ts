@@ -1,18 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController,LoadingController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { ResetPage } from '../reset/reset';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-import { LoadingController } from 'ionic-angular';
-
-
-
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -39,7 +29,7 @@ export class LoginPage {
       this.responseData = result;
       let auth = this.responseData.responseCode;
       console.log(this.responseData);
-      if (auth == 0 || auth == 0) {
+      if (auth == 0 || auth == '00' || auth == '0') {
         loading.dismiss();
         console.log(this.responseData.responseCode);
         // guardar los datos en dos variables distintas usuario y empresas
@@ -50,6 +40,7 @@ export class LoginPage {
         sessionStorage.setItem('name',this.responseData.name);
         sessionStorage.setItem('companies', JSON.stringify(this.responseData.listCompanies));
         sessionStorage.setItem('token', this.responseData.token);
+        sessionStorage.setItem('email', this.responseData.email);
         this.navCtrl.push(TabsPage);
         
       } else {

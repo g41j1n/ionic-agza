@@ -25,7 +25,7 @@ export class ResetPage {
   resetmail(){
     let type = 'recoverypassword?';
     const loading = this.loadingCtrl.create({
-      content: 'Cargando...'
+      content: 'Enviando...'
     });
     loading.present();
     this.authService.resetPass(this.userData,type).then((result) =>{
