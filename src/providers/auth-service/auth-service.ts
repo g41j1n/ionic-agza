@@ -15,24 +15,24 @@ export class AuthServiceProvider {
   constructor(public http: Http) {
     console.log('Hello AuthServiceProvider Provider');
   }
-  /* login(credentials,type){
-    return new Promise((resolve, reject) =>{
-      let headers = new Headers();
-
-      this.http.post(urlM + type, JSON.stringify(credentials)).subscribe( res => {
-         resolve(res.json);
-      },(err) =>{
-
-      });
-    });
-
-  } */
-  loginCred(credentials,type){
+   loginCred(credentials,type){
     let urlParameters = Object.keys(credentials).map((i) => i+'='+credentials[i]).join('&')
     
     return new Promise((resolve,reject) =>{
        this.http.get(urlM + type + urlParameters).subscribe(res => {
         resolve( res.json());
+      },(err) =>{
+        reject(err);
+      });
+    });
+  }
+  resetPass(mail,type){
+    return new Promise ( (resolve,reject) => {
+      let urlParameters = Object.keys(mail).map((i) => i+'='+mail[i]).join('&')
+      console.log( urlM + type +urlParameters);
+      
+      this.http.get( urlM + type +urlParameters).subscribe( res =>{
+        resolve(res.json());
       },(err) =>{
         reject(err);
       });

@@ -8,7 +8,10 @@ import { NavController } from 'ionic-angular';
 export class HomePage {
 
   constructor(public navCtrl: NavController) {
-
+  console.log(JSON.parse(sessionStorage.getItem('companies')));
+  console.log(sessionStorage.getItem('token'));
+  
+  
   }
 
 }
