@@ -12,6 +12,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { ResetPage } from '../pages/reset/reset';
 import { ChatPage } from '../pages/chat/chat';
+import { ImpuestosPage } from '../pages/impuestos/impuestos';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -27,6 +28,7 @@ import { ServServiceProvider } from '../providers/serv-service/serv-service';
     LoginPage,
     ResetPage,
     ChatPage,
+    ImpuestosPage,
     TabsPage
   ],
   imports: [
@@ -42,6 +44,7 @@ import { ServServiceProvider } from '../providers/serv-service/serv-service';
     LoginPage,
     ResetPage,
     ChatPage,
+    ImpuestosPage,
     TabsPage
   ],
   providers: [

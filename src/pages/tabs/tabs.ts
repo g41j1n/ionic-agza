@@ -62,7 +62,7 @@ export class TabsPage {
     
   }
   changepass(){
-    const passMod = this.modal.create('ModPassPage');
+    const passMod = this.modal.create('ModPassPage', {typeOf:'2'});
     passMod.present();
   }
   call(){

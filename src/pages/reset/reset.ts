@@ -35,7 +35,7 @@ export class ResetPage {
         // crear animacion de carga
         loading.dismiss();
         let alert = this.alertCtrl.create({
-          title: 'Contraseña Restaurada',
+          title: 'Contraseña Reiniciada',
           subTitle: 'La nueva contraseña se ha enviado a su correo',
           buttons: ['Aceptar']
         });
