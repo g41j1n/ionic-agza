@@ -13,6 +13,9 @@ import { LoginPage } from '../pages/login/login';
 import { ResetPage } from '../pages/reset/reset';
 import { ChatPage } from '../pages/chat/chat';
 import { ImpuestosPage } from '../pages/impuestos/impuestos';
+import { DetalleImpuestosPage } from '../pages/detalle-impuestos/detalle-impuestos';
+
+import { Ionic2RatingModule } from 'ionic2-rating';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -29,11 +32,13 @@ import { ServServiceProvider } from '../providers/serv-service/serv-service';
     ResetPage,
     ChatPage,
     ImpuestosPage,
+    DetalleImpuestosPage,
     TabsPage
   ],
   imports: [
     BrowserModule,HttpModule,    
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    Ionic2RatingModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -45,6 +50,7 @@ import { ServServiceProvider } from '../providers/serv-service/serv-service';
     ResetPage,
     ChatPage,
     ImpuestosPage,
+    DetalleImpuestosPage,
     TabsPage
   ],
   providers: [

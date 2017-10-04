@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, ModalController,LoadingController,AlertController,NavController,NavParams } from 'ionic-angular';
+import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { DetalleImpuestosPage } from '../detalle-impuestos/detalle-impuestos';
+
 
 /**
  * Generated class for the ImpuestosPage page.
@@ -15,7 +18,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ImpuestosPage {
   idE: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private modal: ModalController) {
     
     this.idE = navParams.get("id");
   }
@@ -28,5 +31,13 @@ export class ImpuestosPage {
     
     console.log(selected);
   }
+  detail(){
+    console.log('detalle');
+    this.navCtrl.push('DetalleIPage');
+  }
+  obs(){
+    const detMod = this.modal.create('ObservacionesPage');
+    detMod.present();
 
+  }
 }

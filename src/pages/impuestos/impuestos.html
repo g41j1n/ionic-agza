@@ -16,7 +16,7 @@
 <ion-content padding>
   <ion-item>
     <ion-label>Periodo</ion-label>
-    <ion-select [(ngModel)]="periodo" (ionChange)="onSelectChange($event)">
+    <ion-select (ionChange)="onSelectChange($event)">
       <ion-option value="1">1</ion-option>
       <ion-option value="2">2</ion-option>
       <ion-option value="3">3</ion-option>
@@ -40,11 +40,18 @@
             <ion-col col-3 > Lorem, ipsum dolor sit amet consectetur adipisicing elit.</ion-col>
           </ion-row>
       
-          <ion-row>
+          <ion-row (click)="obs()">
             <ion-col col-3 class="side-title"  >Reporte Financiero</ion-col>
             <ion-col col-3 > Lorem, ipsum dolor sit amet consectetur adipisicing elit.</ion-col>
             <ion-col col-3 > Lorem, ipsum dolor sit amet consectetur adipisicing elit.</ion-col>
             <ion-col col-3 > Lorem, ipsum dolor sit amet consectetur adipisicing elit.</ion-col>
           </ion-row>
-        </ion-grid>
+
+        <ion-row >
+          <ion-col col-3 class="side-title"  >Detalle Impuestos</ion-col>
+          <ion-col col-3  (click)="detail()" > Lorem, ipsum dolor sit amet consectetur adipisicing elit.</ion-col>
+          <ion-col col-3 (click)="obs()"> Lorem, ipsum dolor sit amet consectetur adipisicing elit.</ion-col>
+          <ion-col col-3 > Lorem, ipsum dolor sit amet consectetur adipisicing elit.</ion-col>
+        </ion-row>
+      </ion-grid>
 </ion-content>

@@ -26,12 +26,16 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
             <ion-icon name="lock" item-start></ion-icon>
             <ion-input  type="password" formControlName="password" placeholder="Contraseña"></ion-input>
           </ion-item>
-          <button ion-button type="submit" full [disabled]="!login.valid">Entrar</button>
+          <button ion-button type="submit" block round [disabled]="!login.valid">Entrar</button>
         </form>
       </ion-list>
     </ion-card-content>
   </ion-card>
-  <button class="fixed-bottom" ion-button full (click)="reset()">Solicitar Contraseña</button>
+  <ion-footer no-shadow>
+    <ion-toolbar position="bottom">
+      <button  ion-button block round (click)="reset()">Solicitar Contraseña</button>
+    </ion-toolbar>
+  </ion-footer>
 </ion-content>
 
 `
