@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, ModalController,LoadingController,AlertController,NavController,NavParams } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-import { DetalleImpuestosPage } from '../detalle-impuestos/detalle-impuestos';
+import { ObservacionesPage } from '../observaciones/observaciones';
+
 
 
 /**
@@ -17,14 +18,17 @@ import { DetalleImpuestosPage } from '../detalle-impuestos/detalle-impuestos';
   templateUrl: 'impuestos.html',
 })
 export class ImpuestosPage {
-  idE: any;
+  period: any;
+  meses:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,private modal: ModalController) {
     
-    this.idE = navParams.get("id");
+    this.period = this.navParams.data;
+    console.log();
+    
+    this.meses=['','Enero','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
   }
 
   ionViewDidLoad() {
-    console.log(this.idE);
   }
   onSelectChange(selected){
     console.log('foo');

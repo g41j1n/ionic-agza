@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,App,AlertController } from 'ionic-angular';
+import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import {LoginPage} from '../login/login';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { LoadingController } from 'ionic-angular';
@@ -18,9 +19,14 @@ import { LoadingController } from 'ionic-angular';
   templateUrl: 'reset.html',
 })
 export class ResetPage {
+  private reset : FormGroup;
+  private login : FormGroup;
   responseData : any;
   userData={"email":""};
-  constructor(public navCtrl: NavController, public navParams: NavParams, public app: App, public authService: AuthServiceProvider,public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+  constructor(public formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams, public app: App, public authService: AuthServiceProvider,public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+   this.reset = this.formBuilder.group({
+    email:['',Validators.compose([Validators.required,Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])]
+   });
   }
   resetmail(){
     let type = 'recoverypassword?';
@@ -28,11 +34,13 @@ export class ResetPage {
       content: 'Enviando...'
     });
     loading.present();
-    this.authService.resetPass(this.userData,type).then((result) =>{
+    console.log(this.reset.value);
+    
+    this.authService.resetPass(this.reset.value,type).then((result) =>{
       this.responseData = result;
       console.log(this.responseData);
+      this.reset.reset();
       if (this.responseData.responseCode == 0) {
-        // crear animacion de carga
         loading.dismiss();
         let alert = this.alertCtrl.create({
           title: 'Contraseña Reiniciada',
@@ -42,9 +50,7 @@ export class ResetPage {
         alert.present();
         this.navCtrl.popToRoot();
       } else {
-        /*         crear animacion de carga
-        limpiar campos
-      */
+       
       loading.dismiss();
       
       let alert = this.alertCtrl.create({
@@ -54,6 +60,10 @@ export class ResetPage {
       });
       alert.present();
          }    
+    }, (err) =>{
+      console.log(err);
+      loading.dismiss();
+      
     });
   }
   goback(){

@@ -1,5 +1,7 @@
 import { Component, NgModule } from '@angular/core';
-import { IonicModule, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicModule, IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup  } from '@angular/forms';
+import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 /**
  * Generated class for the CalImpPage page.
  *
@@ -15,11 +17,18 @@ import { IonicModule, IonicPage, NavController, NavParams } from 'ionic-angular'
 })
 export class CalImpPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
   }
+  payload={}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CalImpPage');
+  }
+  chngrw(){
+    console.log(this.payload);
+  }
+  back(){
+    this.viewCtrl.dismiss();
   }
 
 }

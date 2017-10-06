@@ -10,6 +10,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
   ],
   imports: [
     IonicPageModule.forChild(CalImpPage),
+    Ionic2RatingModule
   ],
 })
 export class CalImpPageModule {}

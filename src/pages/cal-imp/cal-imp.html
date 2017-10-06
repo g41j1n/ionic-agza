@@ -21,10 +21,10 @@
     
       <ion-card-content>
         <ion-item>
-          <ion-textarea></ion-textarea>
+          <ion-textarea [(ngModel)]="payload.comment" name="comment "></ion-textarea>
         </ion-item>
         <ion-item>
-         
+          <rating [(ngModel)]="payload.rate" name="rate "></rating>
         </ion-item>
         <ion-item>
           <button ion-button color="secondary" block outline round>Enviar</button>
@@ -33,3 +33,8 @@
     
     </ion-card>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button color="danger" block (click)="back()" round>Cancelar</button>
+  </ion-toolbar>
+</ion-footer>

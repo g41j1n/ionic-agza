@@ -17,16 +17,27 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
     </ion-card-header>
     <ion-card-content>
       <ion-list>
+        <ion-item>
+          <img src="https://ionicframework.com/img/ionic-logo-blog.png">
+        </ion-item>
         <form [formGroup]="login" (ngSubmit)="logForm()">
           <ion-item>
             <ion-icon name="mail" item-start></ion-icon>
             <ion-input type="email" formControlName="email" placeholder="Correo Electronico"></ion-input>
+            
+          </ion-item>
+          
+          <ion-item *ngIf="(login.get('email').hasError('pattern') && (login.get('email').dirty || login.get('email').touched))">
+          EScriba un correo valido
           </ion-item>
           <ion-item>
             <ion-icon name="lock" item-start></ion-icon>
             <ion-input  type="password" formControlName="password" placeholder="Contraseña"></ion-input>
           </ion-item>
-          <button ion-button type="submit" block round [disabled]="!login.valid">Entrar</button>
+         
+          <ion-item>
+            <button ion-button type="submit" block round [disabled]="!login.valid">Entrar</button>
+          </ion-item>
         </form>
       </ion-list>
     </ion-card-content>
@@ -61,8 +72,8 @@ logForm(){
     let auth = this.responseData.responseCode;
     let reset = this.responseData.resetCode;
     console.log(this.responseData);
+    loading.dismiss();
     if (auth === 0 || auth === '00' || auth === '0') {
-      loading.dismiss();
       console.log(this.responseData.responseCode);  
       sessionStorage.setItem('name',this.responseData.name);
       sessionStorage.setItem('companies', JSON.stringify(this.responseData.listCompanies));

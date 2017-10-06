@@ -15,12 +15,12 @@ import { ChatPage } from '../pages/chat/chat';
 import { ImpuestosPage } from '../pages/impuestos/impuestos';
 import { DetalleImpuestosPage } from '../pages/detalle-impuestos/detalle-impuestos';
 
-import { Ionic2RatingModule } from 'ionic2-rating';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { ServServiceProvider } from '../providers/serv-service/serv-service';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +38,6 @@ import { ServServiceProvider } from '../providers/serv-service/serv-service';
   imports: [
     BrowserModule,HttpModule,    
     IonicModule.forRoot(MyApp),
-    Ionic2RatingModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

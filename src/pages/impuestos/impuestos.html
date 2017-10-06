@@ -14,15 +14,11 @@
 
 
 <ion-content padding>
+  
   <ion-item>
     <ion-label>Periodo</ion-label>
     <ion-select (ionChange)="onSelectChange($event)">
-      <ion-option value="1">1</ion-option>
-      <ion-option value="2">2</ion-option>
-      <ion-option value="3">3</ion-option>
-      <ion-option value="4">4</ion-option>
-      <ion-option value="5">5</ion-option>
-      <ion-option value="6">6</ion-option>
+        <ion-option *ngFor="let item of period" value='{{item.idPeriodos}}'>{{ meses[item.Mes] }} / {{ item.Anio}}</ion-option>
     </ion-select>
   </ion-item>
       <ion-grid text-center>

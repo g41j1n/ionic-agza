@@ -1,7 +1,7 @@
 
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,AlertController,LoadingController,ViewController  } from 'ionic-angular';
-import { FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup  } from '@angular/forms';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 /**
  * Generated class for the ObservacionesPage page.
@@ -54,7 +54,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
   `
 })
 export class ObservacionesPage {
-  constructor( private formBuilder: FormBuilder,public navCtrl : NavController ,params: NavParams, public authService:AuthServiceProvider,public alertCtrl: AlertController, public loadingCtrl: LoadingController, public viewCtrl :ViewController) {}
+  constructor( private formBuilder: FormBuilder,public navCtrl: NavController,public navParams: NavParams,public authService:AuthServiceProvider,public alertCtrl: AlertController, public loadingCtrl: LoadingController, public viewCtrl :ViewController  ) {}
   payload={}
   ionViewDidLoad() {
     console.log('ionViewDidLoad ObservacionesPage');

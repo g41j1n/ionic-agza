@@ -7,14 +7,22 @@
   <ion-card>
     <ion-card-content>
       <ion-list>
-        <ion-item>
-          <ion-label floating>Escribe tu correo electronico</ion-label>
-          <ion-input type="email" [(ngModel)]="userData.email" required pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"></ion-input>
-        </ion-item>
+        <form [formGroup]="reset">
+          <ion-item>
+            <ion-label floating>Escribe tu correo electronico</ion-label>
+            <ion-input type="email" formControlName="email" ></ion-input>
+          </ion-item>
+          <ion-item *ngIf="((reset.get('email').hasError('pattern') || reset.get('email').hasError('required')) && (reset.get('email').dirty || reset.get('email').touched))">
+              <span *ngIf="(reset.get('email').hasError('pattern') && (reset.get('email').dirty || reset.get('email').touched))">   Escriba un correo valido</span>
+              <span *ngIf="(reset.get('email').hasError('required') && (reset.get('email').dirty || reset.get('email').touched))">   Escriba un correo</span>
+          </ion-item>
+        </form>
       </ion-list>
     </ion-card-content>
   </ion-card>
-  
-        <button ion-button full color="success" (click)="resetmail()" class="fixed-bottom" large>Aceptar</button>
-    
+  <ion-footer no-shadow>
+      <ion-toolbar position="bottom">
+        <button ion-button block round color="success" (click)="resetmail()" [disabled]="!reset.valid">Restaurar</button>
+      </ion-toolbar>
+    </ion-footer>
 </ion-content>
