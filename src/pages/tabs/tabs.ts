@@ -6,6 +6,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { HomePage } from '../home/home';
 import { ChatPage } from '../chat/chat';
+import { LoginPage } from '../login/login';
 
 let jobNum: string = '555555';
 @Component({
@@ -43,13 +44,14 @@ export class TabsPage {
       content: 'Cerrando Sesión...'
     });
     loading.present();
+    console.log(this.userData);
     this.authService.loginCred(this.userData ,'closeSession?').then((result) =>{
       this.responseData = result;
       let auth = this.responseData.responseCode;
       console.log(this.responseData.responseCode);
       if (auth == 0 || auth == '00') {
         loading.dismiss();
-        this.navCtrl.popToRoot();
+        this.navCtrl.setRoot(LoginPage);
       }else{
         let alert = this.alertCtrl.create({
           title: 'Error',
@@ -57,6 +59,8 @@ export class TabsPage {
           buttons: ['Aceptar']
         });
         alert.present();
+        loading.dismiss();
+        
       };
     });    
     

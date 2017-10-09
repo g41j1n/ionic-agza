@@ -18,53 +18,21 @@ export class HomePage {
     // this.companies();
     
   }
-  gotoEvent(id){
-    const loading = this.loading.create({
-      content: 'Buscando...'
-    });
-    loading.present();
+  async gotoEvent(id){
+    console.log(id);
+    let pld:any = {'idE': id,'period':1};
     let tk = sessionStorage.getItem('token');
     this.pl={'token': tk,'idCompany':id};
-    console.log(this.pl);
-    this.authService.loginCred(this.pl,'consultPeriods?').then((result) =>{
-      this.responseData = result;
-      let auth = this.responseData.responseCode;
-      loading.dismiss();
-      console.log(auth);
-      
-      if (auth === 0 || auth === '00' || auth === '0') {
-        console.log(this.responseData.listPeriods);
-        this.navCtrl.push(ImpuestosPage,this.responseData.listPeriods);
-      }else{
-        let alert = this.alertCtrl.create({
-          title: 'Ha habido un error en la consulta',
-          subTitle: 'Vuelva a intentarlo o pongase en contacto con soporte tecnico',
-          buttons: ['Aceptar']
-        });
-        alert.present();
-      }
-      if (auth === 1 || auth === '1') {
-        let alert = this.alertCtrl.create({
-          title: 'No se pudo completar',
-          subTitle: this.responseData.message,
-          buttons: ['Aceptar']
-        });
-          alert.present();
-        }
-    }, (err) => {
-      console.log(err);
-      loading.dismiss();
-      let alert = this.alertCtrl.create({
-        title: 'No se pudo completar',
-        subTitle: 'Error:  '+err.status+' , '+err.statusText,
-        buttons: ['Aceptar']
-      });
-      alert.present();
-      
-    } );
+    const est = await this.authService.loginCred(pld,'oProcesoEmpresa?');
+    
+    const prd = await this.authService.loginCred(this.pl,'consultPeriods?')
+    let data:any ={'process':est['listProcess'],'periods':prd['listPeriods']}
+    this.navCtrl.push(ImpuestosPage,data);
+    
     
     
   }
+    
 
 
 }

@@ -4,6 +4,8 @@ import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { TabsPage } from '../tabs/tabs';
 import { ResetPage } from '../reset/reset';
+import { ModPassPage } from '../mod-pass/mod-pass';
+
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 
 @IonicPage()
@@ -28,7 +30,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
           </ion-item>
           
           <ion-item *ngIf="(login.get('email').hasError('pattern') && (login.get('email').dirty || login.get('email').touched))">
-          EScriba un correo valido
+          Escriba un correo valido
           </ion-item>
           <ion-item>
             <ion-icon name="lock" item-start></ion-icon>
@@ -54,7 +56,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 export class LoginPage {
 private login : FormGroup;
 responseData : any;
-constructor( private formBuilder: FormBuilder,public navCtrl: NavController,public navParams: NavParams,public authService:AuthServiceProvider,public alertCtrl: AlertController, public loadingCtrl: LoadingController ) {
+constructor( private formBuilder: FormBuilder,public navCtrl: NavController,public navParams: NavParams,public authService:AuthServiceProvider,public alertCtrl: AlertController, public loadingCtrl: LoadingController,public modalCtrl: ModalController ) {
   this.login = this.formBuilder.group({
     email:['',Validators.compose([Validators.required,Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
     password:['',Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -63,7 +65,8 @@ constructor( private formBuilder: FormBuilder,public navCtrl: NavController,publ
 
 logForm(){
   const loading = this.loadingCtrl.create({
-    content: 'Ingresando...'
+    content: 'Ingresando...',
+    dismissOnPageChange: true
   });
   loading.present();
   console.log(this.login.value);
@@ -72,22 +75,27 @@ logForm(){
     let auth = this.responseData.responseCode;
     let reset = this.responseData.resetCode;
     console.log(this.responseData);
-    loading.dismiss();
-    if (auth === 0 || auth === '00' || auth === '0') {
-      console.log(this.responseData.responseCode);  
+    if ((auth === 0 || auth === '00' || auth === '0') && (this.responseData.firstLogin === 1 ||this.responseData.firstLogin === "1")) {
+      loading.dismiss();
       sessionStorage.setItem('name',this.responseData.name);
       sessionStorage.setItem('companies', JSON.stringify(this.responseData.listCompanies));
       sessionStorage.setItem('token', this.responseData.token);
       sessionStorage.setItem('email', this.responseData.email);
-      // if(auth === 0 || auth === '00' || auth === '0'){
-        this.navCtrl.push(TabsPage);
-
-      // }else{
-        //TODO: Go to modal
-      // }
+        this.navCtrl.setRoot(TabsPage);
       
-    } else {
-      // clear forms
+    }
+    // if ((auth === 0 || auth === '00' || auth === '0') && (this.responseData.firstLogin == 0 ||this.responseData.firstLogin == "0")) {
+    //   loading.dismiss();
+    //   console.log('first Login');
+      
+    //   sessionStorage.setItem('name',this.responseData.name);
+    //   sessionStorage.setItem('companies', JSON.stringify(this.responseData.listCompanies));
+    //   sessionStorage.setItem('token', this.responseData.token);
+    //   sessionStorage.setItem('email', this.responseData.email);
+    //   let modal = this.modalCtrl.create(ModPassPage);
+    //   modal.present();
+    // }
+     else {
       this.login.reset();
       loading.dismiss();
       let alert = this.alertCtrl.create({
@@ -98,6 +106,14 @@ logForm(){
       alert.present();
 
     }
+  }, (err) => {
+    loading.dismiss();
+    let alert = this.alertCtrl.create({
+      title: 'Conexion interrumpida',
+      subTitle: 'no se ha podido conectar con el servidor',
+      buttons: ['Aceptar']
+    });
+    alert.present();
   });
 
 

@@ -28,26 +28,19 @@
             <ion-col col-3 class="grid-head"  >Estatus</ion-col>
             <ion-col col-3 class="grid-head"  >Observaciones</ion-col>
           </ion-row>
-      
-          <ion-row>
-            <ion-col col-3  class="side-title" >Capturar Contabilidad</ion-col>
-            <ion-col col-3 > Lorem, ipsum dolor sit amet consectetur adipisicing elit.</ion-col>
-            <ion-col col-3 > Lorem, ipsum dolor sit amet consectetur adipisicing elit.</ion-col>
-            <ion-col col-3 > Lorem, ipsum dolor sit amet consectetur adipisicing elit.</ion-col>
+          <ion-row *ngFor="let pr of process">
+            <ion-col col-3  class="side-title" >{{ pr.descripcion}}</ion-col>
+            <ion-col col-3 (click)="detail(pr.idEmpresasProcesosPeriodos)" > </ion-col>
+            <ion-col col-3 > 
+              <ion-select disabled  [(ngModel)]="pr.estatus">
+                <ion-option value="P">Pendiente</ion-option>
+                <ion-option value="E">En proceso</ion-option>
+                <ion-option value="C">Concluido</ion-option>
+                <ion-option value="B">Baja</ion-option>
+              </ion-select>
+          </ion-col>
+            <ion-col col-3 (click)="obs(pr.idEmpresasProcesosPeriodos)">{{ pr.observaciones }}</ion-col>
           </ion-row>
-      
-          <ion-row (click)="obs()">
-            <ion-col col-3 class="side-title"  >Reporte Financiero</ion-col>
-            <ion-col col-3 > Lorem, ipsum dolor sit amet consectetur adipisicing elit.</ion-col>
-            <ion-col col-3 > Lorem, ipsum dolor sit amet consectetur adipisicing elit.</ion-col>
-            <ion-col col-3 > Lorem, ipsum dolor sit amet consectetur adipisicing elit.</ion-col>
-          </ion-row>
-
-        <ion-row >
-          <ion-col col-3 class="side-title"  >Detalle Impuestos</ion-col>
-          <ion-col col-3  (click)="detail()" > Lorem, ipsum dolor sit amet consectetur adipisicing elit.</ion-col>
-          <ion-col col-3 (click)="obs()"> Lorem, ipsum dolor sit amet consectetur adipisicing elit.</ion-col>
-          <ion-col col-3 > Lorem, ipsum dolor sit amet consectetur adipisicing elit.</ion-col>
-        </ion-row>
+         
       </ion-grid>
 </ion-content>

@@ -19,27 +19,32 @@ import { ObservacionesPage } from '../observaciones/observaciones';
 })
 export class ImpuestosPage {
   period: any;
+  process: any;
   meses:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,private modal: ModalController) {
     
-    this.period = this.navParams.data;
-    console.log();
+   this.period = this.navParams.data.periods;
+  this.process = this.navParams.data.process;
     
     this.meses=['','Enero','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
   }
 
   ionViewDidLoad() {
+    console.log(this.process);
+    
   }
   onSelectChange(selected){
     console.log('foo');
     
     console.log(selected);
   }
-  detail(){
-    console.log('detalle');
+  detail(id){
+    console.log('detalle'+id);
     this.navCtrl.push('DetalleIPage');
   }
-  obs(){
+  obs(id){
+    console.log('observaciones'+id);
+    
     const detMod = this.modal.create('ObservacionesPage');
     detMod.present();
 

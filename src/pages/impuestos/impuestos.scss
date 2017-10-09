@@ -7,4 +7,11 @@ page-impuestos {
         background: color($colors, primary);
         color:#fff;
     }
+    .col > .select{
+        padding: 0px;
+        max-width: 98%;
+    }
+    .col .select .select-icon {
+        display: none;
+    }
 }

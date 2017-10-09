@@ -63,6 +63,12 @@ export class ResetPage {
     }, (err) =>{
       console.log(err);
       loading.dismiss();
+      let alert = this.alertCtrl.create({
+        title: 'Conexion interrumpida',
+        subTitle: 'no se ha podido conectar con el servidor',
+        buttons: ['Aceptar']
+      });
+      alert.present();
       
     });
   }

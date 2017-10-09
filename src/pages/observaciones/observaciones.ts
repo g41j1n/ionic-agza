@@ -29,9 +29,10 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
         <ion-item>
         <ion-label>Estatus</ion-label>
         <ion-select [(ngModel)]="payload.status" name="status">
-          <ion-option value="1">1</ion-option>
-          <ion-option value="2">2</ion-option>
-          <ion-option value="6">6</ion-option>
+          <ion-option value="p">Pendiente</ion-option>
+          <ion-option value="e">En Proceso</ion-option>
+          <ion-option value="c">Concluido</ion-option>
+          <ion-option value="b">Baja</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
