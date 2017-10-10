@@ -25,12 +25,20 @@ export class ImpuestosPage {
     
    this.period = this.navParams.data.periods;
   this.process = this.navParams.data.process;
+  this.meses=['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  this.period.forEach(element => {
+    var d = element.periodo;
+    var y= d.slice(0,4);
+    var m= d.slice(4);
+    m= m.replace(/^0/g, '')
+    element.periodo = y+' - '+ this.meses[m] ;
+  });
     
-    this.meses=['','Enero','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
   }
 
   ionViewDidLoad() {
     console.log(this.process);
+    console.log(this.period);
     
   }
   onSelectChange(selected){

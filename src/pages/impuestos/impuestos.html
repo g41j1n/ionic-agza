@@ -18,7 +18,7 @@
   <ion-item>
     <ion-label>Periodo</ion-label>
     <ion-select (ionChange)="onSelectChange($event)">
-        <ion-option *ngFor="let item of period" value='{{item.idPeriodos}}'>{{ meses[item.Mes] }} / {{ item.Anio}}</ion-option>
+        <ion-option *ngFor="let item of period" value='{{item.idPeriodoEmpresa}}'>{{item.periodo }}</ion-option>
     </ion-select>
   </ion-item>
       <ion-grid text-center>

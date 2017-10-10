@@ -20,13 +20,15 @@ export class HomePage {
   }
   async gotoEvent(id){
     console.log(id);
-    let pld:any = {'idE': id,'period':1};
+    let pld = {'idE': id,'period':1};
     let tk = sessionStorage.getItem('token');
     this.pl={'token': tk,'idCompany':id};
     const est = await this.authService.loginCred(pld,'oProcesoEmpresa?');
     
-    const prd = await this.authService.loginCred(this.pl,'consultPeriods?')
-    let data:any ={'process':est['listProcess'],'periods':prd['listPeriods']}
+    const prd = await this.authService.loginCred(this.pl,'oEmpPer?')
+    // console.log(prd['periods']);
+    
+    let data:any ={'process':est['listProcess'],'periods':prd['periods']}
     this.navCtrl.push(ImpuestosPage,data);
     
     

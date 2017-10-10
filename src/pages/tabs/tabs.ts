@@ -70,8 +70,7 @@ export class TabsPage {
     passMod.present();
   }
   call(){
-    console.log('llamada');
-    this.callNumber.callNumber(jobNum,true)
+    this.callNumber.callNumber(jobNum, true)
     .then(() => console.log('Launched dialer!'))
     .catch(() => console.log('Error launching dialer'));
     

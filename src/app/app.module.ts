@@ -20,7 +20,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { ServServiceProvider } from '../providers/serv-service/serv-service';
-
+import { Keyboard } from '@ionic-native/keyboard';
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,8 @@ import { ServServiceProvider } from '../providers/serv-service/serv-service';
   providers: [
     StatusBar,
     CallNumber,
+    Keyboard,
+    FingerprintAIO,
     InAppBrowser,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
