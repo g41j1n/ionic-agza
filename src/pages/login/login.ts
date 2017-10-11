@@ -27,7 +27,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
         <form [formGroup]="login" (ngSubmit)="logForm()">
           <ion-item>
             <ion-icon name="mail" item-start></ion-icon>
-            <ion-input type="email" formControlName="email" placeholder="Correo Electronico" [disabled]="dsbl"></ion-input>
+            <ion-input [(ngModel)]="emailV" type="email" formControlName="email" placeholder="Correo Electronico" [disabled]="dsbl"></ion-input>
             
           </ion-item>
           
@@ -36,7 +36,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
           </ion-item>
           <ion-item>
             <ion-icon name="lock" item-start></ion-icon>
-            <ion-input  type="password" formControlName="password" placeholder="Contraseña" [disabled]="dsbl"></ion-input>
+            <ion-input  [(ngModel)]="pwV" type="password" formControlName="password" placeholder="Contraseña" [disabled]="dsbl"></ion-input>
           </ion-item>
          
           <ion-item>
@@ -58,6 +58,8 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 export class LoginPage {
 private login : FormGroup;
 responseData : any;
+emailV:any;
+pwV:any;
 fiOp: FingerprintOptions;
 dsbl: boolean = false;
 constructor( private plataform: Platform, private fingerprint: FingerprintAIO, private formBuilder: FormBuilder,public navCtrl: NavController,public navParams: NavParams,public authService:AuthServiceProvider,public alertCtrl: AlertController, public loadingCtrl: LoadingController,public modalCtrl: ModalController ) {
@@ -72,9 +74,14 @@ constructor( private plataform: Platform, private fingerprint: FingerprintAIO, p
   }
 }
 ionViewDidLoad() {
-  // if (localStorage.getItem("key")) {
-    // this.dsbl =true
-  // }
+  if(localStorage.getItem("name")){
+    this.emailV= localStorage.getItem("name")
+    this.pwV= localStorage.getItem("key")
+  }
+  if (localStorage.getItem("key")) {
+    this.dsbl =true;
+    this.fingerTest(); 
+  }
 }
 logForm(){
   const loading = this.loadingCtrl.create({
@@ -98,6 +105,7 @@ logForm(){
       // if(cc === "OK"){
 
         localStorage.setItem('key', this.login.value.password);
+        localStorage.setItem('name', this.login.value.email);
       // }
         this.navCtrl.setRoot(TabsPage);
       
@@ -139,7 +147,32 @@ logForm(){
 reset(){
   this.navCtrl.push(ResetPage);
 }
-
+async fingerTest(){
+  console.log('fingerID');
+  
+  try{
+    await this.plataform.ready();
+    const av = await this.fingerprint.isAvailable();
+    if(av === "OK"){
+      const res = await this.fingerprint.show(this.fiOp).then(e =>{
+        console.log(e);
+        
+      }).catch(e =>{
+        console.log(e);
+        
+      });
+      // this.logForm();
+    }
+    if(av != "OK"){
+    this.dsbl =false;
+    
+    }
+  }
+  catch(e){
+    alert(e);
+  }
+  //this.navCtrl.push(ResetPage);
+}
 // async fingerTest(){
 //   try{
 //     await this.plataform.ready();
