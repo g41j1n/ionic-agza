@@ -3,4 +3,9 @@ page-login {
       position: fixed;
       bottom: 3vh;
   }
+  .centered-inside{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
