@@ -90,7 +90,7 @@ export class LoginPage {
       this.pwV= localStorage.getItem("key")
     }
     if (localStorage.getItem("key")) {
-      this.dsbl =true;
+     
       this.fingerTest(); 
     }
   }
@@ -141,6 +141,7 @@ export class LoginPage {
       await this.plataform.ready();
       const av = await this.fingerprint.isAvailable();
       if(av === "OK"){
+        this.dsbl =true;
         this.fngr=false;
         const res = await this.fingerprint.show(this.fiOp).then(e =>{
           this.logForm();

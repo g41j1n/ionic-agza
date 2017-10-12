@@ -1,17 +1,33 @@
 page-impuestos {
-    .grid-head{
-        background: color($colors, primary);
-        color:#fff;
-    }
-    .side-title{
-        background: color($colors, primary);
-        color:#fff;
-    }
-    .col > .select{
-        padding: 0px;
-        max-width: 98%;
-    }
-    .col .select .select-icon {
-        display: none;
-    }
+    // .grid-head{
+    //     background: color($colors, primary);
+    //     color:#fff;
+    // }
+    // .side-title{
+    //     background: color($colors, primary);
+    //     color:#fff;
+    // }
+    // .col > .select{
+    //     padding: 0px;
+    //     max-width: 98%;
+    // }
+    // .col .select .select-icon {
+    //     display: none;
+    // }
+    
+        table{ 
+            th, td{
+                height: 2vh;
+                text-align: center;
+                vertical-align: center;
+                padding: 1vh 2vw;
+            }
+            th{
+                white-space: nowrap;
+                background: color($colors, primary);
+                color: #fff;
+                position: sticky;
+            }
+        }
+        
 }
