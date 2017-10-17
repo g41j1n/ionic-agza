@@ -21,7 +21,8 @@ export class ImpuestosPage {
   period: any;
   process: any;
   meses:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private modal: ModalController) {
+  idE:any; 
+  constructor(public navCtrl: NavController, public navParams: NavParams,private modal: ModalController, public service:AuthServiceProvider,public alertCtrl: AlertController) {
     
    this.period = this.navParams.data.periods;
   this.process = this.navParams.data.process;
@@ -32,19 +33,18 @@ export class ImpuestosPage {
     var m= d.slice(4);
     m= m.replace(/^0/g, '')
     element.periodo = y+' - '+ this.meses[m] ;
+    this.idE= this.process[0].idEmpresa;
+    
   });
     
   }
 
   ionViewDidLoad() {
-    console.log(this.process);
     console.log(this.period);
     
   }
-  onSelectChange(selected){
-    console.log('foo');
-    
-    console.log(selected);
+  onSelectChange(sel){
+    this.refresh(this.idE,sel);
   }
   detail(id){
     console.log('detalle'+id);
@@ -57,4 +57,23 @@ export class ImpuestosPage {
     detMod.present();
 
   }
+  refresh(id,tm){
+    let pl= {'idE':id,'period':tm};
+    this.service.loginCred(pl,'oProcesoEmpresa?').then(r =>{
+      console.log(
+        r['listProcess']);
+      this.process = 
+      r['listProcess']
+
+    }).catch(e =>{
+      let alert = this.alertCtrl.create({
+        title: 'Conexion interrumpida',
+        subTitle: 'no se ha podido conectar con el servidor',
+        buttons: ['Aceptar']
+      });
+      alert.present();
+      
+    });
+    
+  };
 }
