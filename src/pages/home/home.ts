@@ -12,10 +12,14 @@ export class HomePage {
   listCompanies:any;
   pl:any;
   responseData:any;
-  
+  count :any;
   constructor(public navCtrl: NavController, public authService: AuthServiceProvider, public loading:LoadingController, public alertCtrl: AlertController ) {
     this.listCompanies = JSON.parse(sessionStorage.getItem('companies'));
+    this.count = Object.keys(this.listCompanies).length;
     // this.companies();
+    if (this.count == 1) {
+      this.gotoEvent(this.listCompanies[0].idEmpresaUsuario);
+    }
     
   }
   async gotoEvent(id){
