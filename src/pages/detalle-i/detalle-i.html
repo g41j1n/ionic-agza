@@ -7,48 +7,41 @@
 <ion-header>
   
     <ion-navbar>
-      <ion-title>Tabla de Impuestos</ion-title>
+      <ion-title>Detalles</ion-title>
     </ion-navbar>
   
   </ion-header>
   
   
-  <ion-content padding>
-    
-        <ion-grid text-center>
-            <ion-row align-items-center>
-              <ion-col col-3 class="grid-head" > Impuestos</ion-col>
-              <ion-col col-3 class="grid-head"  >$</ion-col>
-              <ion-col col-3 class="grid-head"  >Fecha</ion-col>
-              <ion-col col-3 class="grid-head"  >Aceptar</ion-col>
+  <ion-content>
+      <ion-card>
+          <ion-card-header>
+            Proceso
+          </ion-card-header>
+          <ion-card-content>
+            <!-- <h2>Detalles del proceso</h2> -->
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo voluptates quibusdam ullam mollitia officia itaque dolore provident consequuntur. Sed numquam aut suscipit consectetur eveniet laborum beatae iste autem et ducimus.
+            </p>
+          </ion-card-content>
+        </ion-card>
+            <!-- <ion-item >
+              <ion-label>Comentarios</ion-label>
+              <ion-textarea [(ngModel)]="response" name="response"></ion-textarea>
+            </ion-item> -->
+          <ion-row>
+              <ion-col>
+                <button ion-button icon-left clear small (click)="onAccept()">
+                  <ion-icon name="thumbs-up"></ion-icon>
+                  <div>Aceptar</div>
+                </button>
+              </ion-col>
+              <ion-col>
+                <button ion-button icon-left clear small (click)="onCancel()">
+                  <ion-icon name="thumbs-down"></ion-icon>
+                  <div>Aclarar</div>
+                </button>
+              </ion-col>
+              
             </ion-row>
-        
-            <ion-row align-items-center>
-              <ion-col col-3 >ISR</ion-col>
-              <ion-col col-3 > 1 </ion-col>
-              <ion-col col-3 > 12-12-2012</ion-col>
-              <ion-col col-3 > <button ion-button color="secondary" block round >Aceptar</button> </ion-col>
-            </ion-row>
-        
-            <ion-row align-items-center>
-              <ion-col col-3 >ISR</ion-col>
-              <ion-col col-3 > 1 </ion-col>
-              <ion-col col-3 > 12-12-2012</ion-col>
-              <ion-col col-3 > <button ion-button color="secondary" block round>Aceptar</button> </ion-col>
-            </ion-row>
-
-            <ion-row align-items-center>
-              <ion-col col-3 >ISR</ion-col>
-              <ion-col col-3 > 1 </ion-col>
-              <ion-col col-3 > 12-12-2012</ion-col>
-              <ion-col col-3 > <button ion-button color="secondary" block round>Aceptar</button> </ion-col>
-            </ion-row>
-
-            <ion-row align-items-center>
-              <ion-col col-3 >ISR</ion-col>
-              <ion-col col-3 > 1 </ion-col>
-              <ion-col col-3 > 12-12-2012</ion-col>
-              <ion-col col-3 > <button ion-button color="secondary" (click)="agreed()"block round>Aceptar</button> </ion-col>
-            </ion-row>
-          </ion-grid>
   </ion-content>

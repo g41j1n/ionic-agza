@@ -84,6 +84,11 @@ export class LoginPage {
         disableBackup: true
       }
   }
+
+  /* 
+  Al iniciar la aplicación revisa si existe o no el usuario
+  en el localStorage para asignarlo
+  */
   ionViewDidLoad() {
     if(localStorage.getItem("name")){
       this.emailV= localStorage.getItem("name")
@@ -94,6 +99,13 @@ export class LoginPage {
       this.fingerTest(); 
     }
   }
+
+  /* 
+  funcion que formatea los datos del formulario de login 
+  para enviar los datos al servidor. Si el servidor responde
+  con los datos del usuario almacena dichos datos en sessionStorage 
+  y localStorage y redirige a TabsPage
+  */
   logForm(){
     const loading = this.loadingCtrl.create({
       content: 'Ingresando...',
@@ -133,9 +145,18 @@ export class LoginPage {
       alert.present();
     });
   }
+
+  /* 
+   redirige a la pagina de reset
+  */
   reset(){
     this.navCtrl.push(ResetPage);
   }
+  
+  /* 
+  revisa si existe el lector de huellas en el dispositivo
+  si existe despliega el mensaje de autenticacion de huella
+  */
   async fingerTest(){
     try{
       await this.plataform.ready();

@@ -2,19 +2,15 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 const urlM = "http://192.168.0.22/SISV1/index.php/Agzapp/";
-// const urlM = "http://192.168.0.22/SISV1/index.php/Agzapp/LoginApp?email=e@e.com&password=1";
-/*
-  Generated class for the AuthServiceProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class AuthServiceProvider {
 
   constructor(public http: Http) {
-    console.log('Hello AuthServiceProvider Provider');
   }
+  /*
+    funcion para login. toma las credenciales desde un form
+    generando una url para hacer el request
+   */
    loginCred(credentials,type){
     let urlParameters = Object.keys(credentials).map((i) => i+'='+credentials[i]).join('&')
     
@@ -26,6 +22,10 @@ export class AuthServiceProvider {
       });
     });
   }
+  /* 
+    genera la url para con el correo al que se le generara la contraseña temporal
+
+  */
   resetPass(mail,type){
     return new Promise ( (resolve,reject) => {
       let urlParameters = Object.keys(mail).map((i) => i+'='+mail[i]).join('&')
@@ -38,5 +38,22 @@ export class AuthServiceProvider {
       });
     });
   }
- 
+
+  /* 
+   request para aceptar o cancelar el proceso seleccionado
+  */
+  processReview(data) {
+    // console.log(data);
+    return new Promise ( (resolve,reject) => {
+      let urlParameters = 'token='+sessionStorage.getItem('token')+'&idProcess='+ data.id+ '&status='+ data.status+'&response='+data.response;
+      // console.log( urlM + '' +urlParameters);
+      this.http.get( urlM + 'validateAdvance?' +urlParameters).subscribe( res =>{
+        resolve(res.json());
+      },(err) =>{
+        reject(err);
+      });
+    });
+
+
+  }
 }

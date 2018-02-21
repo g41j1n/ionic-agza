@@ -8,6 +8,7 @@ import { HomePage } from '../home/home';
 import { ChatPage } from '../chat/chat';
 import { LoginPage } from '../login/login';
 
+/* cambiar numero de oficina */
 let jobNum: string = '555555';
 @Component({
   templateUrl: 'tabs.html'
@@ -37,6 +38,9 @@ export class TabsPage {
   ionViewDidLoad() {
     
   }
+  /* 
+  cerrar sesion
+  */
   logout(){
     console.log('log out');
     console.log(this.userData + 'closeSession?');
@@ -65,10 +69,17 @@ export class TabsPage {
     });    
     
   }
+  /* 
+  crea un modal para cambiar la contraseñan del usuario logueado
+  */
   changepass(){
     const passMod = this.modal.create('ModPassPage', {typeOf:'2'});
     passMod.present();
   }
+
+  /* 
+  llama a la aplicacion de telefono para llamar a jobNum
+  */
   call(){
     this.callNumber.callNumber(jobNum, true)
     .then(() => console.log('Launched dialer!'))

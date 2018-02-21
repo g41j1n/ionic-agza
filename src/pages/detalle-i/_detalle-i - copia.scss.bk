@@ -1,0 +1,6 @@
+page-detalle-i {
+    .grid-head{
+        background: color($colors, primary);
+        color:#fff;
+    }
+}

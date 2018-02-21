@@ -21,7 +21,7 @@
         <ion-option *ngFor="let item of period" value='{{item.idPeriodoEmpresa}}' >{{item.periodo }}</ion-option>
     </ion-select>
   </ion-item>
-      <ion-scroll scrollX="true" style="width: 90%; height: 50vh; margin:auto">
+      <!-- <ion-scroll scrollX="true" style="width: 90%; height: 50vh; margin:auto">
               <table>
                   <thead>
                     <tr>
@@ -38,7 +38,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let pr of process">
+                    <tr *ngFor="let pr of process" (click)="detail(pr.idEmpresasProcesosPeriodos)">
                       <td>{{ pr.porcesos}}</td>
                       <td>{{ pr.fecha}}</td>
                       <td>{{ pr.estatus}}</td>
@@ -55,5 +55,39 @@
                 </table>
           <div class="tableWrapper">
           </div>
-        </ion-scroll>
+        </ion-scroll> -->
+        <ion-item *ngFor="let pr of process" (click)="detail(pr.idEmpresasProcesosPeriodos)">
+          <ion-card>
+            <ion-card-header>
+              {{ pr.porcesos}}
+            </ion-card-header>
+            <ion-card-content>
+              <ion-row>
+                {{ pr.observaciones}}
+              </ion-row>
+              <ion-row>
+
+                <ion-col [ngSwitch]="pr.estatus">
+                    <ion-item *ngSwitchCase="'C'" round outline small>
+                        <ion-badge>Calculado</ion-badge>
+                    </ion-item>
+                    <ion-item *ngSwitchCase="'E'" round outline small>
+                        <ion-badge color="danger">Pendiente</ion-badge>
+                    </ion-item>
+                    <ion-item *ngSwitchCase="'P'" round outline small>
+                        <ion-badge color="danger">En proceso</ion-badge>
+                    </ion-item>
+                    <ion-item *ngSwitchCase="'A'" round outline small>
+                        <ion-badge color="danger">Autorizado</ion-badge>
+                    </ion-item>
+                    <ion-item *ngSwitchDefault  round outline small>
+                        <ion-badge color="secondary">No disponible</ion-badge>
+                    </ion-item>
+                    
+                </ion-col>
+                <ion-col>{{ pr.fecha}}</ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-item>
 </ion-content>

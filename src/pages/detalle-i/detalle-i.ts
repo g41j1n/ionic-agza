@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
-/**
- * Generated class for the DetalleIPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { ObservacionesPage } from '../observaciones/observaciones';
+
+
+import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+
 
 @IonicPage()
 @Component({
@@ -14,16 +13,35 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
   templateUrl: 'detalle-i.html',
 })
 export class DetalleIPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams,public modal: ModalController) {
+response: string;
+status: boolean;
+idPro : string;
+pl:{};
+  constructor(public navCtrl: NavController, public navParams: NavParams,public modal: ModalController,public authService:AuthServiceProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DetalleIPage');
+    // console.log('ionViewDidLoad DetalleIPage');
+    // this.idPro = this.navParams.get('id');
+
   }
-  agreed(){
+  agreed() {
     const modAg = this.modal.create('CalImpPage');
     modAg.present();
   }
-
+  onCancel() {
+    this.status= true ;
+    const detMod = this.modal.create('ObservacionesPage');
+    detMod.present();
+  }
+  onAccept() {
+    this.status= false;
+    this.onSubmit();
+    
+  }
+  onSubmit() {
+    this.pl = {id: this.idPro, response: this.response, status: this.status};
+    this.authService.processReview(this.pl);
+    this.navCtrl.popToRoot();
+  }
 }
