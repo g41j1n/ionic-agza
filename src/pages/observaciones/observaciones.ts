@@ -18,30 +18,17 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
   <ion-card>
     <ion-card-content>
       <ion-item>
-        <img src="https://ionicframework.com/img/ionic-logo-blog.png">
+        <img src="https://ionicframework.com/img/ionic-logo-blog.png" width="60">
       </ion-item>
-      <form (ngSubmit)="chngrw()">
+      <form (ngSubmit)="onSubmit()">
         <ion-item>
-          <ion-label stacked>Ingrese fecha</ion-label>
-          <ion-input type="date" [(ngModel)]="payload.fecha" name="title"></ion-input>
+          <ion-label stacked>Ingrese Comentario</ion-label>
+          <ion-textarea [(ngModel)]="payload" [ngModelOptions]="{standalone: true}"></ion-textarea>
         </ion-item>
         <ion-item>
-        <ion-label>Estatus</ion-label>
-        <ion-select [(ngModel)]="payload.status" name="status">
-          <ion-option value="p">Pendiente</ion-option>
-          <ion-option value="e">En Proceso</ion-option>
-          <ion-option value="c">Concluido</ion-option>
-          <ion-option value="b">Baja</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-          <ion-label stacked>Ingrese Comentario</ion-label>
-          <ion-textarea [(ngModel)]="payload.comment" name="comment"></ion-textarea>
-      </ion-item>
-      <ion-item>
           <button ion-button type="submit"  block round>Enviar</button>
-          </ion-item>
-          </form>
+        </ion-item>
+      </form>
           
           </ion-card-content>
           </ion-card>
@@ -54,15 +41,74 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
   `
 })
 export class ObservacionesPage {
-  constructor( public navCtrl: NavController,public navParams: NavParams,public authService:AuthServiceProvider,public alertCtrl: AlertController, public loadingCtrl: LoadingController, public viewCtrl :ViewController  ) {}
-  payload={}
+  constructor( public navCtrl: NavController,
+              public navParams: NavParams,
+              public authService:AuthServiceProvider,
+              public alertCtrl: AlertController,
+              public loadingCtrl: LoadingController,
+              public viewCtrl :ViewController,
+              ) {}
+  payload: string;
+  pl={}
+  responseData: any;
   ionViewDidLoad() {
     console.log('ionViewDidLoad ObservacionesPage');
+    console.log(this.navParams.get('id'));
+    
   }
   chngrw(){
     console.log(this.payload);
   }
   back(){
     this.viewCtrl.dismiss();
+  }
+  onSubmit() {
+    let alert = this.alertCtrl.create({
+      title: 'Mensaje enviado',
+      subTitle: 'El el mensaje se envio correctamente',
+      buttons: ['Aceptar']
+    });
+    let errorm = this.alertCtrl.create({
+      title: 'Ha ocurrido un error',
+      subTitle: 'El servidor no ha respondido',
+      buttons: ['Aceptar']
+    });
+     const loading = this.loadingCtrl.create({
+      content: 'Enviando...',
+      dismissOnPageChange: true
+    });
+    loading.present();
+    if (this.navParams.get('id') ) {
+      this.pl = {token: sessionStorage.getItem('token'),id: this.navParams.get('id'), response: this.payload, status: this.navParams.get('status')};
+      console.log(this.pl);
+      this.authService.loginCred(this.pl,'responseProcessClient?').then(
+        (res) =>{
+        this.responseData = res;
+        loading.dismiss();
+          if(this.responseData.responseCode == '0'){
+            alert.present();
+          }else{
+            errorm.present();
+          }
+          this.viewCtrl.dismiss();
+        },
+        (error) => {
+          loading.dismiss();
+          errorm.present();
+          this.viewCtrl.dismiss();
+        }
+      );
+      // this.navCtrl.popToRoot();
+    }else{
+      loading.dismiss();
+        let alert = this.alertCtrl.create({
+          title: 'Ha ocurrido un error',
+          subTitle: 'El servidor no ha respondido',
+          buttons: ['Aceptar']
+        });
+        alert.present();
+        this.viewCtrl.dismiss();
+        // this.navCtrl.popToRoot();
+    }
   }
 }

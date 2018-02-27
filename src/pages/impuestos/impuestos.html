@@ -65,6 +65,9 @@
               <ion-row>
                 {{ pr.observaciones}}
               </ion-row>
+              <ion-row *ngIf="pr.importe != 0">
+                {{ pr.importe}}
+              </ion-row>
               <ion-row>
 
                 <ion-col [ngSwitch]="pr.estatus">

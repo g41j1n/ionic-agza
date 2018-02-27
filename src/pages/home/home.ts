@@ -22,21 +22,19 @@ export class HomePage {
     }
     
   }
+
+  /*
+    toma el id y el primer periodo de la empresa seleccionada y solicita los procesos y periodos restantes
+  */
   async gotoEvent(id){
     console.log(id);
     let pld = {'idE': id,'period':1};
     let tk = sessionStorage.getItem('token');
     this.pl={'token': tk,'idCompany':id};
-    const est = await this.authService.loginCred(pld,'oProcesoEmpresa?');
-    
-    const prd = await this.authService.loginCred(this.pl,'oEmpPer?')
-    // console.log(prd['periods']);
-    
+      const est = await this.authService.loginCred(pld,'oProcesoEmpresa?');
+      const prd = await this.authService.loginCred(this.pl,'oEmpPer?')
     let data:any ={'process':est['listProcess'],'periods':prd['periods']}
     this.navCtrl.push(ImpuestosPage,data);
-    
-    
-    
   }
     
 

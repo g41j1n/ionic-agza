@@ -112,6 +112,7 @@ export class LoginPage {
       dismissOnPageChange: true
     });
     loading.present();
+    console.log(this.login.value);
     this.authService.loginCred(this.login.value,'loginApp?').then((result) =>{
       this.responseData = result;
       let auth = this.responseData.responseCode;
