@@ -24,7 +24,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
               <ion-row>
                 <ion-col ></ion-col >
                 <ion-col class="centered-inside">
-                  <ion-img src="https://ionicframework.com/img/ionic-logo-blog.png"></ion-img>
+                  <ion-img src="../../assets/icon.png"></ion-img>
                 </ion-col >
                 <ion-col ></ion-col>
               </ion-row>

@@ -28,7 +28,7 @@ export class ImpuestosPage {
   */
   constructor(public navCtrl: NavController, public navParams: NavParams,private modal: ModalController, public service:AuthServiceProvider,public alertCtrl: AlertController) {
     
-   this.period = this.navParams.data.periods;
+  this.period = this.navParams.data.periods;
   this.process = this.navParams.data.process;
   this.meses=['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
   this.period.forEach(element => {

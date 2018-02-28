@@ -18,7 +18,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
   <ion-card>
     <ion-card-content>
       <ion-item>
-        <img src="https://ionicframework.com/img/ionic-logo-blog.png" width="60">
+        <img src="../../assets/logo.png">
       </ion-item>
       <form (ngSubmit)="onSubmit()">
         <ion-item>

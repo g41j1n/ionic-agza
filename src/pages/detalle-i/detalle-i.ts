@@ -16,6 +16,8 @@ export class DetalleIPage {
 response: string;
 status: boolean;
 idPro : string;
+datos: any;
+
 pl:{};
 responseData: any;
   constructor(public navCtrl: NavController,
@@ -29,8 +31,51 @@ responseData: any;
   ionViewDidLoad() {
     // console.log('ionViewDidLoad DetalleIPage');
     this.idPro = this.navParams.get('id');
-    this.pl = {token: sessionStorage.getItem('token'),id: this.idPro};
-    this.authService.loginCred(this.pl,'oFEmpresa?')
+    this.pl = {token: sessionStorage.getItem('token'),idE: this.idPro};
+    this.authService.loginCred(this.pl,'oFEmpresa?').then(
+      (res) => {
+        this.responseData = res;
+      let auth = this.responseData.responseCode;
+      let detail = this.responseData.processDetail;
+      if ((auth === 0 || auth === '00' || auth === '0') && (detail.length >0 || detail !== undefined)) {
+        // status : "C"
+        // estatusImp : ""
+        // fecha : "2017-09-15 00:00:00"
+        // idEmpresa : "1"
+        // idEmpresasProcesosPeriodos : "12"
+        // idPeriodo : "1"
+        // idProceso1 : "0"
+        // idProcesos : "14"
+        // importe : "0.0000"
+        // observaciones : "observaciones"
+        // porcesos : "Impuestos de seguridad social" 
+        // proceso1 : null
+        // proceso2 : null
+        // proceso3 : null
+        // proceso4 : null
+        // this.datos.estatus=detail[0].estatus;
+        this.datos ={estatus: detail[0].estatus,
+          estatusImp:detail[0].estatusImp,
+          fecha:detail[0].fecha,
+          idEmpresa:detail[0].idEmpresa,
+          idEmpresasProcesosPeriodos:detail[0].idEmpresasProcesosPeriodos,
+          idPeriodo:detail[0].idPeriodo,
+          idProceso:detail[0].idProceso1,
+          proceso:detail[0].porcesos,
+          subproceso1:detail[0].proceso1,
+          subproceso2:detail[0].proceso2,
+          subproceso3:detail[0].proceso3,
+          subproceso4:detail[0].proceso4,
+          comentario:detail[0].observaciones,
+          total:detail[0].importe
+        };
+        console.log(this.datos);
+      }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     console.log(this.idPro);
 
   }

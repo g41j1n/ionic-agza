@@ -13,16 +13,65 @@
   </ion-header>
   
   
-  <ion-content>
+  <ion-content *ngIf="datos">
       <ion-card>
           <ion-card-header>
-            Proceso
+            titulo
           </ion-card-header>
           <ion-card-content>
-            <!-- <h2>Detalles del proceso</h2> -->
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo voluptates quibusdam ullam mollitia officia itaque dolore provident consequuntur. Sed numquam aut suscipit consectetur eveniet laborum beatae iste autem et ducimus.
-            </p>
+            <ion-row>
+            {{datos.proceso}}
+            </ion-row>
+              <ion-row>
+                <h4>Obsrervaciones</h4>
+                <ion-item>
+                  <p>
+                    {{datos.comentario}}
+                  </p>
+                </ion-item>
+              </ion-row>
+              <ion-row *ngIf="datos.subproceso1||datos.subproceso2||datos.subproceso3||datos.subproceso4">
+                <ion-item>Subprocesos</ion-item>
+                <ion-item *ngIf="datos.subproceso1">
+                      {{datos.subproceso1}}
+                </ion-item>
+                <ion-item *ngIf="datos.subproceso2">
+                    {{datos.subproceso2}}
+                </ion-item>
+                <ion-item *ngIf="datos.subproceso3">
+                  {{datos.subproceso3}}
+                </ion-item>
+                <ion-item *ngIf="datos.subproceso4">
+                  {{datos.subproceso4}}
+                </ion-item>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <h4>Fecha</h4>
+                  <ion-item>
+                    {{datos.fecha}}
+                  </ion-item>
+                </ion-col>
+                <ion-col [ngSwitch]="datos.estatus">
+                    <h4>Estatus</h4>
+                    <ion-item *ngSwitchCase="'C'">
+                        Calculado
+                    </ion-item>
+                    <ion-item *ngSwitchCase="'E'">
+                        Pendiente
+                    </ion-item>
+                    <ion-item *ngSwitchCase="'P'">
+                        En proceso
+                    </ion-item>
+                    <ion-item *ngSwitchCase="'A'">
+                        Autorizado
+                    </ion-item>
+                    <ion-item *ngSwitchDefault >
+                       No disponible
+                    </ion-item>
+                    
+                </ion-col>
+              </ion-row>
           </ion-card-content>
         </ion-card>
             <!-- <ion-item >

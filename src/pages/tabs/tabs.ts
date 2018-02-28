@@ -9,7 +9,7 @@ import { ChatPage } from '../chat/chat';
 import { LoginPage } from '../login/login';
 
 /* cambiar numero de oficina */
-let jobNum: string = '555555';
+let jobNum: string = '52076878';
 @Component({
   templateUrl: 'tabs.html'
 })
